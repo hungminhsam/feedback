@@ -28,6 +28,9 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       //this is the URL User will be redirected to after completing Google Aunthetication
       callbackURL: "/auth/google/callback",
+      // this tell GoogleStrategy to trust the proxy between our Server and Browser
+      // this will enable https in the callback
+      proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }) //search for the user
