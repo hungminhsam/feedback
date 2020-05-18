@@ -9,16 +9,22 @@ module.exports = (app) => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/surveys");
+    }
+  );
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.send({});
   });
 
   app.get("/api/current_user", (req, res) => {
     if (!req.user) {
-      res.send("Operation NOT Authorized");
+      res.send({});
     }
     res.send(req.user);
   });

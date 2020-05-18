@@ -17,7 +17,12 @@ passport.serializeUser((user, done) => {
 // then search MongoDB for a record that matches this 'id'
 // and return the user record
 passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => done(null, user));
+  // User.findById(id)
+  //   .then((user) => done(null, user))
+  //   .catch((err) => done(err));
+  User.findOne({ _id: id })
+    .then((user) => done(null, user))
+    .catch((err) => done(err));
 });
 
 //set up passport to use Google OAuth2.0 Strategy
@@ -32,27 +37,21 @@ passport.use(
       // this will enable https in the callback
       proxy: true,
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }) //search for the user
-        .then((existingUser) => {
-          if (!existingUser) {
-            // create a new Record if it does not exist
-            // need to call save() to persist the User Instance (Record) to MongoDB
-            new User({
-              googleId: profile.id,
-              givenName: profile.name.givenName,
-              familyName: profile.name.familyName,
-              email: profile.emails.value,
-            })
-              .save()
-              .then((user) => done(null, user))
-              .catch((error) => {});
-          } else {
-            console.log(`Welcome back! ${profile.name.givenName}`);
-            done(null, existingUser);
-          }
-        })
-        .catch((error) => {});
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (!existingUser) {
+        const user = await new User({
+          googleId: profile.id,
+          givenName: profile.name.givenName,
+          familyName: profile.name.familyName,
+          email: profile.emails.value,
+        }).save();
+        done(null, user);
+      } else {
+        console.log(`Welcome back! ${profile.name.givenName}`);
+        done(null, existingUser);
+      }
     }
   )
 );

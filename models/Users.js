@@ -10,6 +10,7 @@ const userSchema = new Schema({
   givenName: String,
   familyName: String,
   email: String,
+  credits: { type: Number, default: 0 },
 });
 
 // Create a collection call 'users' in our MongoDB, using the provided 'userSchema'
