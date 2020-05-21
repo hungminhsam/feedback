@@ -12,7 +12,8 @@ const keys = require("./config/keys");
 // Because Mongoose Model Function Calls are buffered by default
 //
 // This line should be after MongoDB connection. It is here to prove the buffering
-require("./models/Users");
+require("./models/User");
+require("./models/Survey");
 
 //Connect to MongoDB
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
@@ -39,6 +40,8 @@ require("./services/passport");
 require("./routes/authRoutes")(app);
 //Create Route Handlers for Billing
 require("./routes/billingRoutes")(app);
+//Create Route Handlers for surveys
+require("./routes/surveyRoutes")(app);
 
 // IN DEV ENVIRONMENT
 // ------- we use 2 servers, React Dev Server and Express Server
