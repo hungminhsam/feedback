@@ -3,18 +3,10 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 import Header from "./Header";
-
-const Landing = (props) => {
-  return <div>Landing</div>;
-};
-
-const Dashboard = (props) => {
-  return <div>Dashboard</div>;
-};
-
-const SurveyNew = (pros) => {
-  return <div>SurveyNew</div>;
-};
+import Landing from "./Landing";
+import Dashboard from "./Dashboard";
+import SurveyNew from "./SurveyNew";
+import SurveyNewConfirm from "./SurveyNewConfirm";
 
 const App = (props) => {
   useEffect(() => {
@@ -28,6 +20,7 @@ const App = (props) => {
         <Route exact path="/" component={Landing} />
         <Route exact path="/surveys" component={Dashboard} />
         <Route exact path="/surveys/new" component={SurveyNew} />
+        <Route exact path="/surveys/new/confirm" component={SurveyNewConfirm} />
       </BrowserRouter>
     </div>
   );

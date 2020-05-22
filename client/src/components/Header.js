@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../actions";
-import StrikePayment from "./StripePayment";
+import StripePayment from "./StripePayment";
 
 const Header = (props) => {
   const renderHeader = () => {
@@ -19,7 +19,9 @@ const Header = (props) => {
     }
     return (
       <React.Fragment>
-        <StrikePayment className="item" />
+        <span className="item">
+          <StripePayment />
+        </span>
         <span className="item">Credits : {props.auth.credits}</span>
         <span className="item">{props.auth.givenName}</span>
         <Link
