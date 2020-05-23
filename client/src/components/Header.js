@@ -5,12 +5,13 @@ import { signOut } from "../actions";
 import StripePayment from "./StripePayment";
 
 const Header = (props) => {
+  const { auth, signOut } = props;
   const renderHeader = () => {
-    if (!props.auth) {
+    if (!auth) {
       return <div className="ui text loader item">Loading</div>;
     }
 
-    if (!props.auth.givenName) {
+    if (!auth.givenName) {
       return (
         <a href="/auth/google" className="item">
           Sign In With <i className="google red icon"></i>
@@ -22,12 +23,12 @@ const Header = (props) => {
         <span className="item">
           <StripePayment />
         </span>
-        <span className="item">Credits : {props.auth.credits}</span>
-        <span className="item">{props.auth.givenName}</span>
+        <span className="item">Credits : {auth.credits}</span>
+        <span className="item">{auth.givenName}</span>
         <Link
           to="/"
           onClick={() => {
-            props.signOut();
+            signOut();
           }}
           className="item"
         >
@@ -39,10 +40,7 @@ const Header = (props) => {
 
   return (
     <div className="ui menu">
-      <Link
-        to={props.auth && props.auth.givenName ? "/surveys" : "/"}
-        className="item"
-      >
+      <Link to={auth && auth.givenName ? "/surveys" : "/"} className="item">
         <i className="react blue big icon"></i>
       </Link>
       <div className="right menu">{renderHeader()}</div>

@@ -2,18 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
 import SurveyFormField from "./SurveyFormField";
+import formFields from "./formFields";
 import validateEmails from "../../utils/validateEmails";
 
-const FIELDS = [
-  { label: "Survey Title", name: "title" },
-  { label: "Email Subject", name: "subject" },
-  { label: "Email Body", name: "body" },
-  { label: "Recipients", name: "recipients" },
-];
-
 const SurveyForm = (props) => {
+  const { handleSubmit, onSubmit } = props;
   const rendernFields = () => {
-    return FIELDS.map((field) => (
+    return formFields.map((field) => (
       <Field
         key={field.name} // this is to get rid of the unique key requirement in React List
         component={SurveyFormField}
@@ -25,7 +20,7 @@ const SurveyForm = (props) => {
   };
 
   return (
-    <form onSubmit={props.handleSubmit(props.onSubmit)} className="ui form">
+    <form onSubmit={handleSubmit(onSubmit)} className="ui form">
       {rendernFields()}
       <Link to="/surveys" className="ui primary button">
         Cancel
@@ -45,7 +40,7 @@ const SurveyForm = (props) => {
 const validate = (formValues) => {
   const error = {};
 
-  FIELDS.forEach(({ label, name }) => {
+  formFields.forEach(({ label, name }) => {
     if (!formValues[name]) {
       error[name] = `${label} is required, cannot be empty`;
     }

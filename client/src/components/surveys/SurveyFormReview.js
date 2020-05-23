@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { submitSurvey } from "../../actions";
 import { withRouter } from "react-router-dom";
-import { reset } from "redux-form";
+import formFields from "./formFields";
 
 const SurveyFormReview = (props) => {
+  const { surveyFormValues, submitSurvey, previousPage } = props;
+
   //the buttons will be disabled when the user click submit
   const [disable, setDisable] = useState(false);
 
@@ -12,18 +14,18 @@ const SurveyFormReview = (props) => {
     //disabled buttons
     setDisable(true);
     //call Action Creator
-    await props.submitSurvey(props.surveyFormValues);
+    await submitSurvey(surveyFormValues);
 
     //redirect to the surveys page
     props.history.push("/surveys");
   };
 
   const renderFormValues = () => {
-    return Object.entries(props.surveyFormValues).map(([name, value]) => {
+    return formFields.map(({ label, name }) => {
       return (
         <div className="item" key={name}>
-          <div className="ui horizontal label">{name}</div>
-          {value}
+          <div className="ui horizontal label">{label}</div>
+          {surveyFormValues[name]}
         </div>
       );
     });
@@ -35,7 +37,7 @@ const SurveyFormReview = (props) => {
       <div className="ui divided list">{renderFormValues()}</div>
       <button
         className={`ui secondary ${disable ? "disabled" : ""} button`}
-        onClick={props.previousPage}
+        onClick={previousPage}
       >
         Back
       </button>
