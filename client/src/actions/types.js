@@ -1,4 +1,3 @@
 export const FETCH_USER = "FETCH_USER";
 export const SIGN_OUT = "SIGN_OUT";
-export const SAVE_CREATE_NEW_SURVEY_FORM = "SAVE_CREATE_NEW_SURVEY_FORM";
-export const CREATE_SURVEY = "CREATE_SURVEY";
+export const ERROR = "ERROR";

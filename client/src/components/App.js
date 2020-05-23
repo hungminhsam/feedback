@@ -5,8 +5,8 @@ import { fetchUser } from "../actions";
 import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
-import SurveyNew from "./SurveyNew";
-import SurveyNewConfirm from "./SurveyNewConfirm";
+import SurveyNew from "./surveys/SurveyNew";
+import SurveyNewConfirm from "./surveys/SurveyFormReview";
 
 const App = (props) => {
   useEffect(() => {
