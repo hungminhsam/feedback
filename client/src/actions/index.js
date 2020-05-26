@@ -45,6 +45,3 @@ export const submitSurvey = (surveyFormValues) => async (dispatch) => {
     dispatch({ type: FETCH_USER, payload: user });
   }
 };
-
-export const fetchSurveys = (userId) => async (dispatch) => {
-}
