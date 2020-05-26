@@ -28,7 +28,7 @@ export const postStripeToken = (token) => async (dispatch) => {
 export const submitSurvey = (surveyFormValues) => async (dispatch) => {
   //post the surveyFormValues to "/api/survey"
   //the Express Server will send back a User in Auth
-  const res = await fetch("/api/survey", {
+  const res = await fetch("/api/surveys", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,3 +45,6 @@ export const submitSurvey = (surveyFormValues) => async (dispatch) => {
     dispatch({ type: FETCH_USER, payload: user });
   }
 };
+
+export const fetchSurveys = (userId) => async (dispatch) => {
+}
