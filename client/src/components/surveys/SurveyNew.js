@@ -16,7 +16,9 @@ const SurveyNew = (props) => {
 
   return (
     <React.Fragment>
-      <h2>Create New Survey</h2>
+      <h1 className="ui header">
+        <i className="comments icon"></i>Create New Survey
+      </h1>
       <div className="ui segment">
         {page === 1 && <SurveyForm onSubmit={nextPage} />}
         {page === 2 && <SurveyFormReview previousPage={previousPage} />}

@@ -13,6 +13,14 @@ const emailTemplate = require("../services/emailTemplates/surveyTemplate");
 const Survey = mongoose.model("surveys");
 
 module.exports = (app) => {
+  //Route Handler for getting a list of surveys associate with an account
+  app.get("/api/surveys", requireLogin, async (req, res) => {
+    //load the list of surveys belong the logged in account from DB
+    const surveys = await Survey.find({ _user: req.user.id }, "-recipients");
+    res.send(surveys);
+  });
+
+  //Route Handler for displaying thank you message after user provides feedback
   app.get("/api/surveys/:surveyId/:choice", (req, res) => {
     res.send("Thank you for the feedback!");
   });

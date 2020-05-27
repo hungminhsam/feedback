@@ -8,10 +8,11 @@ import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
 import SurveyNewConfirm from "./surveys/SurveyFormReview";
 
-const App = (props) => {
+const App = ({ fetchUser }) => {
+  //[fetchUser] instead of [] is to get rid of the MISSING DEPENDENCY warning from React
   useEffect(() => {
-    props.fetchUser();
-  }, []);
+    fetchUser();
+  }, [fetchUser]);
 
   return (
     <div className="ui container">

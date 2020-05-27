@@ -1,4 +1,4 @@
-import { FETCH_USER, SIGN_OUT, ERROR } from "./types";
+import { FETCH_USER, SIGN_OUT, FETCH_SURVEYS } from "./types";
 
 export const fetchUser = () => async (dispatch) => {
   //attempt the fetch the user at /api/current_user
@@ -44,4 +44,11 @@ export const submitSurvey = (surveyFormValues) => async (dispatch) => {
     //dispatch the FETCH_USER action to the reducers
     dispatch({ type: FETCH_USER, payload: user });
   }
+};
+
+export const fetchSurveys = () => async (dispatch) => {
+  //fetch surveys from the back end server
+  const res = await fetch("/api/surveys");
+  const surveys = await res.json();
+  dispatch({ type: FETCH_SURVEYS, payload: surveys });
 };

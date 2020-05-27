@@ -1,7 +1,7 @@
 import React from "react";
 
 const SurveyFormField = (props) => {
-  const { input, type, label, meta } = props;
+  const { input, label, meta } = props;
 
   const renderError = (meta) => {
     if (meta.touched && meta.error) {
