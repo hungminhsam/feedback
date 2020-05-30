@@ -7,6 +7,8 @@ import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
 import SurveyNewConfirm from "./surveys/SurveyFormReview";
+import StripePaymentSuccess from "./payment/StripePaymentSuccess";
+import StripePaymentCanceled from "./payment/StripPaymentCanceled";
 
 const App = ({ fetchUser }) => {
   //[fetchUser] instead of [] is to get rid of the MISSING DEPENDENCY warning from React
@@ -18,6 +20,16 @@ const App = ({ fetchUser }) => {
     <div className="ui container">
       <BrowserRouter>
         <Header />
+        <Route
+          exact
+          path="/payment/success/:sessionId"
+          component={StripePaymentSuccess}
+        />
+        <Route
+          exact
+          path="/payment/canceled"
+          component={StripePaymentCanceled}
+        />
         <Route exact path="/" component={Landing} />
         <Route exact path="/surveys" component={Dashboard} />
         <Route exact path="/surveys/new" component={SurveyNew} />

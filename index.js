@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
@@ -14,14 +14,29 @@ const keys = require("./config/keys");
 // This line should be after MongoDB connection. It is here to prove the buffering
 require("./models/User");
 require("./models/Survey");
+require("./models/StripeWebhooksEvent");
 
 //Connect to MongoDB
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 //Create Express APP
 const app = express();
 //apply body_parser middleware
-app.use(bodyParser.json());
+// app.use(bodyParser.json()); Since Express v4.16.0 use express.json() instead
+app.use(
+  express.json({
+    verify: (req, res, buf, encoding) => {
+      //if the req.path is the Stripe Webhooks Handler
+      //make the rawBody available as req.rawBody
+      if (req.path === "/api/payment/stripe/webhooks") {
+        req.rawBody = buf;
+      }
+    },
+  })
+);
 //set up Express to use Cookie Session
 app.use(
   cookieSession({
