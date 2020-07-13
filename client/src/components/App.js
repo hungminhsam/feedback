@@ -34,39 +34,35 @@ const App = ({ auth, fetchUser }) => {
   } else if (!auth.givenName) {
     //user not logged in, show landing page
     return <Landing />;
-  } else {
-    return (
-      //user has logged in, show protected contents
-      <div className="protected-page">
-        <BrowserRouter>
-          {/* header will always show up */}
-          <Header />
-          <Route
-            exact
-            path="/payment/success/:sessionId"
-            component={StripePaymentSuccess}
-          />
-          <Route
-            exact
-            path="/payment/canceled"
-            component={StripePaymentCanceled}
-          />
-          {/* Redirect logged in user to /surveys */}
-          <Route exact path="/">
-            <Redirect push to="/surveys" />
-          </Route>
-          <Route exact path="/surveys" component={Dashboard} />
-          <Route exact path="/surveys/new" component={SurveyNew} />
-          <Route
-            exact
-            path="/surveys/new/confirm"
-            component={SurveyNewConfirm}
-          />
-          <Footer />
-        </BrowserRouter>
-      </div>
-    );
   }
+
+  return (
+    //user has logged in, show protected contents
+    <div className="protected-page">
+      <BrowserRouter>
+        {/* header will always show up */}
+        <Header />
+        <Route
+          exact
+          path="/payment/success/:sessionId"
+          component={StripePaymentSuccess}
+        />
+        <Route
+          exact
+          path="/payment/canceled"
+          component={StripePaymentCanceled}
+        />
+        {/* Redirect logged in user to /surveys */}
+        <Route exact path="/">
+          <Redirect push to="/surveys" />
+        </Route>
+        <Route exact path="/surveys" component={Dashboard} />
+        <Route exact path="/surveys/new" component={SurveyNew} />
+        <Route exact path="/surveys/new/confirm" component={SurveyNewConfirm} />
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
 };
 
 const mapStateToPros = (state, ownProps) => {
