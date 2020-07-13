@@ -3,26 +3,35 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SurveyList from "./surveys/SurveyList";
 
+import { ReactComponent as DashboardIcon } from "../img/dashboard.svg";
+import { ReactComponent as PlusIcon } from "../img/plus.svg";
+
+const renderNewSurveyBnt = (auth) => {
+  console.log(auth && auth.credits > 0);
+  if (auth && auth.credits > 0) {
+    return (
+      <Link to="/surveys/new" className="btn btn--newsurvey">
+        <PlusIcon className="btn__icon btn__icon--left" />
+        New Survey
+      </Link>
+    );
+  }
+
+  return <div className="out-of-credits">You need to add more credits</div>;
+};
+
 const Dashboard = ({ auth }) => {
-  //disabled the New Survey Button if there is no credits
-  const disabledNewSurvey = auth && auth.credits > 0 ? "" : "disabled";
   return (
-    <div>
-      <div className="ui clearing basic segment">
-        <h1 className="ui left floated header">
-          <i className="tachometer alternate icon"></i>
-          <div className="content">Dashboard </div>
+    <section className="section">
+      <div className="section__heading section__heading--dashboard">
+        <h1 className="section__heading__title">
+          <DashboardIcon className="section__heading__icon" />
+          Dashboard
         </h1>
-        <Link
-          to="/surveys/new"
-          className={`ui right floated labeled icon green large basic ${disabledNewSurvey} button`}
-        >
-          <i className="plus square green icon"></i>
-          New Survey
-        </Link>
+        {renderNewSurveyBnt(auth)}
       </div>
       <SurveyList />
-    </div>
+    </section>
   );
 };
 

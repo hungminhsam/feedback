@@ -3,6 +3,8 @@ import { reduxForm } from "redux-form";
 import SurveyForm from "./SurveyForm";
 import SurveyFormReview from "./SurveyFormReview";
 
+import { ReactComponent as NewSurveyIcon } from "../../img/file-text.svg";
+
 const SurveyNew = (props) => {
   const [page, setPage] = useState(1);
 
@@ -15,19 +17,18 @@ const SurveyNew = (props) => {
   };
 
   return (
-    <div>
-      <div className="ui clearing basic segment">
-        <h1 className="ui left floated header">
-          <i className="comments icon"></i>
-          <div className="content">Create New Survey</div>
+    <section className="section">
+      <div className="section__heading">
+        <h1 className="section__heading__title">
+          <NewSurveyIcon className="section__heading__icon" />
+          Create New Survey
         </h1>
       </div>
-
-      <div className="ui segment">
+      <div className="survey-form-container">
         {page === 1 && <SurveyForm onSubmit={nextPage} />}
         {page === 2 && <SurveyFormReview previousPage={previousPage} />}
       </div>
-    </div>
+    </section>
   );
 };
 

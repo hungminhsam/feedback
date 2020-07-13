@@ -18,7 +18,7 @@ const SurveyList = (props) => {
     fetchSurveys();
   }, [fetchSurveys]);
 
-  return <div className="ui cards">{renderSurveys(surveys)}</div>;
+  return <div className="survey-list">{renderSurveys(surveys)}</div>;
 };
 
 const mapStateToProps = (state, ownProps) => {

@@ -17,10 +17,17 @@ require("./models/Survey");
 require("./models/StripeWebhooksEvent");
 
 //Connect to MongoDB
-mongoose.connect(keys.mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .catch((error) => {
+    console.log(
+      "*******************MongoDB Connection Error*************************"
+    );
+    console.log(error);
+  });
 
 //Create Express APP
 const app = express();

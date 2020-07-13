@@ -1,5 +1,5 @@
 //StripePayment
-//Show a from with
+//Show a form with
 // - single input field
 // - increase button
 // - decrease button
@@ -84,13 +84,15 @@ const StripePayment = (props) => {
     return res.json();
   };
 
+  // render the stripe checkout component
   if (!state.error) {
     return (
-      <div className="ui right labeled action input">
-        <label htmlFor="amount" className="ui label">
+      <div className="add-credits-form">
+        <label className="add-credits-form__label" htmlFor="amount">
           $
         </label>
         <input
+          className="add-credits-form__input"
           type="number"
           min="1"
           max="999"
@@ -99,7 +101,7 @@ const StripePayment = (props) => {
           readOnly
         />
         <button
-          className="ui button"
+          className="add-credits-form__btn--increment"
           onClick={() => {
             dispatch({ type: "increment" });
           }}
@@ -107,7 +109,8 @@ const StripePayment = (props) => {
           +
         </button>
         <button
-          className={`ui button ${state.quantity > 1 ? "" : "disabled"}`}
+          className="add-credits-form__btn--decrement"
+          disabled={state.quantity > 1 ? false : true}
           onClick={() => {
             dispatch({ type: "decrement" });
           }}
@@ -115,9 +118,10 @@ const StripePayment = (props) => {
           -
         </button>
         <button
-          className={`ui primary ${
-            !state.stripe || state.loading ? "disabled" : ""
-          } ${state.loading ? "loading" : ""} button`}
+          disabled={!state.stripe || state.loading ? true : false}
+          className={`add-credits-form__btn--submit ${
+            state.loading ? "add-credits-form__btn--loading" : ""
+          }`}
           onClick={onStartStripeCheckout}
         >
           Add Credits

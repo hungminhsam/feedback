@@ -23,31 +23,39 @@ const SurveyFormReview = (props) => {
   const renderFormValues = () => {
     return formFields.map(({ label, name }) => {
       return (
-        <div className="item" key={name}>
-          <div className="ui horizontal label">{label}</div>
-          {surveyFormValues[name]}
+        <div className="survey-form-review__field" key={name}>
+          <div className="survey-form-review__label">{label}</div>
+          <div className="survey-form-review__value">
+            {surveyFormValues[name]}
+          </div>
         </div>
       );
     });
   };
 
   return (
-    <React.Fragment>
-      <p>Please check that the information below is correct!</p>
-      <div className="ui divided list">{renderFormValues()}</div>
-      <button
-        className={`ui secondary ${disable ? "disabled" : ""} button`}
-        onClick={previousPage}
-      >
-        Back
-      </button>
-      <button
-        className={`ui primary ${disable ? "loading" : ""} button`}
-        onClick={onSubmit}
-      >
-        Create New Survey
-      </button>
-    </React.Fragment>
+    <div className="survey-form-review">
+      <p className="survey-form-review__prompt">
+        Please check that the information below is correct
+      </p>
+      <div className="survey-form-review__fields">{renderFormValues()}</div>
+      <div className="survey-form__buttons">
+        <button
+          disabled={disable ? true : false}
+          className="btn btn--cancel"
+          onClick={previousPage}
+        >
+          Back
+        </button>
+        <button
+          disabled={disable ? true : false}
+          className={`btn ${disable ? "btn--submitting" : "btn--submit"}`}
+          onClick={onSubmit}
+        >
+          Create New Survey
+        </button>
+      </div>
+    </div>
   );
 };
 

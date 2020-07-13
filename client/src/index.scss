@@ -1,0 +1,747 @@
+$font-brand: "Ubuntu", sans-serif;
+$font-brand-weight: 700;
+$color-brand: rgb(0, 137, 123);
+$color-negative: rgba(255, 0, 0, 1);
+$color-positive: rgba(0, 128, 0, 1);
+$color-warning: rgb(227, 243, 9);
+
+$font-heading: "Raleway", sans-serif;
+$font-heading-normal-weight: 200;
+$font-heading-heavy-weight: 700;
+
+$font-text: "Source Sans Pro", sans-serif;
+$font-text-normal-weight: 300;
+$font-text-heavy-weight: 600;
+
+$color-dark: rgba(0, 0, 0, 1);
+$color-dark-light-1: rgba(0, 0, 0, 0.5);
+$color-dark-light-2: rgba(0, 0, 0, 0.3);
+$color-dark-light-3: rgba(0, 0, 0, 0.1);
+
+$color-primary: rgb(0, 137, 123);
+
+$box-shadow-dark: 1rem 1rem 2rem rgba(0, 0, 0, 0.5);
+$box-shadow-dark-small: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
+
+$header-height: 8rem;
+
+$line-1: 1px solid $color-dark-light-1;
+$line-2: 1px solid $color-dark-light-2;
+$line-3: 1px solid $color-dark-light-3;
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: $font-text;
+  font-weight: $font-text-normal-weight;
+  line-height: 1.6rem;
+  color: $color-dark;
+}
+
+/***********************************************************
+    General Heading Styles
+************************************************************/
+
+h1 {
+  font-family: $font-heading;
+  font-weight: $font-heading-heavy-weight;
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-family: $font-heading;
+  font-weight: $font-heading-heavy-weight;
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-family: $font-heading;
+  font-weight: $font-heading-heavy-weight;
+  font-size: 2rem;
+}
+
+/***********************************************************
+    General Button Styles
+************************************************************/
+
+.btn {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: $color-primary;
+  color: white;
+  padding: 2rem 4rem;
+  font-weight: $font-text-heavy-weight;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    fill: currentColor;
+    color: currentColor;
+    width: 2rem;
+    height: 2rem;
+
+    &--left {
+      margin-right: 1rem;
+    }
+
+    &--right {
+      margin-left: 1rem;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: opacity(0.5);
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn--google {
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  box-shadow: $box-shadow-dark;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-image: url(./img/google-icon.svg);
+    background-size: cover;
+    margin-right: 2rem;
+  }
+}
+
+.btn--newsurvey {
+  background-color: $color-brand;
+  border-radius: 0.5rem;
+  box-shadow: $box-shadow-dark;
+}
+
+.btn--cancel {
+  border-radius: 0.5rem;
+  background-color: $color-dark-light-1;
+}
+
+.btn--submit {
+  border-radius: 0.5rem;
+}
+
+.btn--submitting {
+  cursor: not-allowed;
+  position: relative;
+
+  &:after {
+    content: "Submitting...";
+    position: absolute;
+    background-color: $color-brand;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/***********************************************************
+    General link styles
+************************************************************/
+.link {
+  color: $color-primary;
+
+  &__icon {
+    fill: currentColor;
+  }
+
+  &:hover {
+    color: $color-primary;
+    filter: brightness(120%);
+  }
+
+  &--flex {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/***********************************************************
+    Card style
+************************************************************/
+
+.card {
+  border: $line-2;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: $box-shadow-dark-small;
+
+  &__img {
+  }
+
+  &__content {
+  }
+
+  &__header {
+    border-bottom: $line-3;
+    padding: 2rem;
+  }
+
+  &__body {
+    padding: 2rem 6rem;
+  }
+
+  &__footer {
+    border-top: $line-3;
+    padding: 2rem;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+    color: $color-dark-light-1;
+  }
+}
+
+.email {
+  &__field {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+
+    &__label {
+      margin-right: 2rem;
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      background-color: $color-primary;
+      color: white;
+      font-weight: bold;
+      clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
+    }
+  }
+}
+
+/***********************************************************
+    Loading Page Styles
+************************************************************/
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__box {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin-top: 2rem;
+      text-transform: uppercase;
+      color: $color-dark-light-2;
+      font-weight: $font-text-heavy-weight;
+      letter-spacing: 0.3rem;
+    }
+  }
+
+  &__img {
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+}
+
+/***********************************************************
+    Landing Page Styles
+************************************************************/
+
+.landing {
+  height: 100vh;
+  background: url(img/landing-bg.jpg);
+  background-size: cover;
+  background-position: center center;
+
+  .content-box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    position: relative;
+    top: 10rem;
+    left: 10rem;
+
+    &__text {
+      &--heading {
+        text-transform: uppercase;
+        letter-spacing: 1rem;
+        color: $color-dark-light-1;
+      }
+
+      &--heading--sub {
+        text-transform: uppercase;
+        letter-spacing: 0.5rem;
+        margin-bottom: 3rem;
+        color: $color-dark-light-2;
+      }
+
+      &--paragraph {
+        font-size: 2rem;
+        color: $color-dark-light-1;
+        font-weight: $font-text-heavy-weight;
+        padding: 0;
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+      }
+
+      &--paragraph::before {
+        content: "";
+        display: inline-block;
+        width: 1.6rem;
+        height: 2.5rem;
+        margin-right: 1rem;
+        padding: 0;
+        background: url(img/keyboard_arrow_right.svg);
+        background-size: cover;
+
+        @supports (mask-image: url()) or (-webkit-mask-image: url()) {
+          background-color: $color-primary;
+          -webkit-mask-image: url(img/keyboard_arrow_right.svg);
+          -webkit-image-size: cover;
+          background-image: none;
+        }
+      }
+    }
+
+    &__action {
+      margin-top: 3rem;
+      display: flex;
+    }
+  }
+}
+
+/*******************************************************************
+    Protected Content: Header, Dashboard, Surveys, Payments, etc
+********************************************************************/
+
+.protected-page {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+/*********************************************************
+    Header Styles
+**********************************************************/
+.header {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: $header-height;
+  border-bottom: $line-2;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    &__link {
+      border: none;
+      text-decoration: none;
+    }
+
+    &__img {
+      width: 6rem;
+      height: 6rem;
+      fill: $color-brand;
+    }
+
+    .brand {
+      font-size: 4rem;
+      font-family: $font-brand;
+      font-weight: $font-brand-weight;
+      color: $color-brand;
+      text-transform: uppercase;
+      letter-spacing: 1rem;
+    }
+  }
+
+  &__nav {
+  }
+}
+
+/*********************************************************
+  Profile Navigation
+**********************************************************/
+.profile-nav {
+  color: $color-dark;
+
+  &__title {
+    cursor: pointer;
+    height: $header-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+  }
+
+  &__links {
+    position: absolute;
+    top: $header-height;
+    right: 0;
+    z-index: 10;
+    border: $line-2;
+    border-top: 0;
+    background-color: white;
+    box-shadow: $box-shadow-dark;
+
+    display: hidden;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top right;
+    transition: all 0.5s;
+  }
+
+  &__item {
+    padding: 2rem;
+
+    .credits {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+
+      &__count {
+        font-weight: $font-text-heavy-weight;
+      }
+    }
+
+    &__link {
+      color: $color-dark;
+    }
+
+    &__link:hover {
+      color: $color-brand;
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    width: 100%;
+    background-color: $color-dark-light-2;
+  }
+
+  img {
+  }
+
+  &:hover &__links {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.profile-name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    line-height: 4rem;
+    width: 6rem;
+    height: 6rem;
+    background-color: $color-brand;
+    color: white;
+    border-radius: 50%;
+  }
+
+  &__text {
+    font-family: $font-heading;
+    font-weight: $font-heading-heavy-weight;
+    font-size: 2.5rem;
+    margin-left: 1rem;
+    color: $color-dark-light-1;
+  }
+}
+
+.add-credits-form {
+  height: 4rem;
+  overflow: hidden;
+
+  display: flex;
+  align-items: stretch;
+
+  &__label {
+    display: inline-block;
+    background-color: $color-dark-light-3;
+    border-top: $line-2;
+    border-bottom: $line-2;
+    border-left: $line-2;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  &__input {
+    background-color: white;
+    border: none;
+    padding: 0 1rem;
+    border-top: $line-2;
+    border-bottom: $line-2;
+  }
+
+  &__btn {
+    &--increment {
+      cursor: pointer;
+      padding: 1rem;
+      border: none;
+      background-color: $color-dark-light-2;
+      border-top: $line-2;
+      border-bottom: $line-2;
+    }
+
+    &--decrement {
+      cursor: pointer;
+      padding: 1rem;
+      border: none;
+      background-color: $color-dark-light-3;
+      border-top: $line-2;
+      border-bottom: $line-2;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    &--increment:active,
+    &--increment:focus,
+    &--decrement:active,
+    &--decrement:focus {
+      outline: none;
+    }
+
+    &--submit {
+      cursor: pointer;
+      border: none;
+      padding: 0 1rem;
+      background-color: $color-brand;
+      color: white;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    &--submit:disabled {
+      cursor: not-allowed;
+      color: white;
+      filter: opacity(50%);
+    }
+
+    &--loading {
+      cursor: not-allowed;
+      position: relative;
+    }
+
+    &--loading:after {
+      content: "Loading ...";
+      position: absolute;
+      background-color: $color-brand;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+/*********************************************************
+  section : Dashboard, NewSurvey, NewSurveyConfirm
+**********************************************************/
+.section {
+  &__heading {
+    margin: 5rem 0;
+
+    &__title {
+      color: $color-dark-light-1;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &__icon {
+      margin-right: 1rem;
+      width: 6rem;
+      height: 6rem;
+      fill: $color-dark-light-1;
+
+      &--warning {
+        fill: $color-warning;
+      }
+
+      &--success {
+        fill: $color-positive;
+      }
+    }
+
+    &--dashboard {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+.out-of-credits {
+  color: $color-negative;
+  border: 1px solid $color-negative;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+}
+
+.survey {
+  &-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &-item {
+    flex: 1;
+
+    &:not(:first-of-type) {
+      margin-top: 4rem;
+    }
+  }
+
+  &__response {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+    &--yes {
+      fill: $color-positive;
+    }
+
+    &--no {
+      margin-left: 3rem;
+      fill: $color-negative;
+    }
+
+    &--total {
+      margin-right: auto;
+      fill: $color-primary;
+    }
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+    }
+  }
+}
+
+.survey-form-container {
+}
+
+.survey-form {
+  &__field {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  &__input {
+    padding: 1rem;
+    border: $line-2;
+    border-radius: 0.5rem;
+    color: $color-dark-light-1;
+
+    &--textarea {
+      height: 20rem;
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+      border: $line-1;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__error {
+    color: $color-negative;
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+.survey-form-review {
+  &__label {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  &__field {
+    margin: 2.5rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/*********************************************************
+  footer
+**********************************************************/
+.footer {
+  padding-top: 10rem;
+  padding-bottom: 2rem;
+}
