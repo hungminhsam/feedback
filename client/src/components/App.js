@@ -36,8 +36,8 @@ const App = ({ auth, fetchUser }) => {
     return <Landing />;
   }
 
+  //user has logged in, show protected contents
   return (
-    //user has logged in, show protected contents
     <div className="protected-page">
       <BrowserRouter>
         {/* header will always show up */}
