@@ -1,9 +1,5 @@
 $font-brand: "Ubuntu", sans-serif;
 $font-brand-weight: 700;
-$color-brand: rgb(0, 137, 123);
-$color-negative: rgba(255, 0, 0, 1);
-$color-positive: rgba(0, 128, 0, 1);
-$color-warning: rgb(227, 243, 9);
 
 $font-heading: "Raleway", sans-serif;
 $font-heading-normal-weight: 200;
@@ -13,10 +9,21 @@ $font-text: "Source Sans Pro", sans-serif;
 $font-text-normal-weight: 300;
 $font-text-heavy-weight: 600;
 
+$color-brand: rgba(0, 137, 123, 1);
+$color-brand-light: rgba(0, 137, 123, 0.5);
+
+$color-negative: rgba(255, 0, 0, 1);
+$color-positive: rgba(0, 128, 0, 1);
+$color-warning: rgb(227, 243, 9);
+
 $color-dark: rgba(0, 0, 0, 1);
 $color-dark-light-1: rgba(0, 0, 0, 0.5);
 $color-dark-light-2: rgba(0, 0, 0, 0.3);
 $color-dark-light-3: rgba(0, 0, 0, 0.1);
+
+$color-white: rgba(255, 255, 255, 1);
+$color-white-1: rgba(255, 255, 255, 0.8);
+$color-white-2: rgba(255, 255, 255, 0.5);
 
 $color-primary: rgb(0, 137, 123);
 
@@ -29,6 +36,15 @@ $line-1: 1px solid $color-dark-light-1;
 $line-2: 1px solid $color-dark-light-2;
 $line-3: 1px solid $color-dark-light-3;
 
+$bp-l: 62.5em; // 1000px / 16px = 62.5em, default browser 1em = 16px
+$bp-m: 50em; // 800px
+$bp-s: 37.5em; // 600px
+$bp-xs: 31.25em; //500px
+$bp-xxs: 20em; //320px
+
+$min-width: 320px;
+$max-width: 100rem;
+
 *,
 *:before,
 *:after {
@@ -39,7 +55,19 @@ $line-3: 1px solid $color-dark-light-3;
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%;
+  font-size: 62.5%; // 1rem = 9px;
+
+  @media only screen and (max-width: $bp-m) {
+    font-size: 56.25%; // 1rem = 9px;
+  }
+
+  @media only screen and (max-width: $bp-s) {
+    font-size: 50%; // 1rem = 8px;
+  }
+
+  @media only screen and (max-width: $bp-xxs) {
+    font-size: 43.75%; // 1rem = 7px;
+  }
 }
 
 body {
@@ -58,6 +86,10 @@ h1 {
   font-family: $font-heading;
   font-weight: $font-heading-heavy-weight;
   font-size: 3.5rem;
+
+  @media only screen and (max-width: $bp-l) {
+    font-size: 3rem;
+  }
 }
 
 h2 {
@@ -79,6 +111,7 @@ h3 {
 .btn {
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
   background-color: $color-primary;
   color: white;
   padding: 2rem 4rem;
@@ -117,6 +150,14 @@ h3 {
   &:active,
   &:focus {
     outline: none;
+  }
+
+  @media only screen and (max-width: $bp-m) {
+    padding: 1.5rem 3rem;
+  }
+
+  @media only screen and (max-width: $bp-s) {
+    padding: 1rem 2rem;
   }
 }
 
@@ -215,6 +256,10 @@ h3 {
 
   &__body {
     padding: 2rem 6rem;
+
+    @media only screen and (max-width: $bp-m) {
+      padding: 2rem;
+    }
   }
 
   &__footer {
@@ -237,12 +282,26 @@ h3 {
     margin: 1rem 0;
 
     &__label {
+      white-space: nowrap;
       margin-right: 2rem;
       padding: 0.5rem 2.5rem 0.5rem 1rem;
       background-color: $color-primary;
       color: white;
       font-weight: bold;
       clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
+
+      @media only screen and (max-width: $bp-xs) {
+        clip-path: none;
+        margin: 0;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    @media only screen and (max-width: $bp-xs) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 2rem;
     }
   }
 }
@@ -283,58 +342,80 @@ h3 {
 ************************************************************/
 
 .landing {
-  height: 100vh;
+  min-height: 100vh;
   background: url(img/landing-bg.jpg);
   background-size: cover;
   background-position: center center;
+  position: relative;
+
+  &:after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  & > * {
+    z-index: 2;
+  }
 
   .content-box {
     display: flex;
     flex-direction: column;
-    width: 50%;
 
     position: relative;
-    top: 10rem;
-    left: 10rem;
+    padding: 10rem;
 
     &__text {
       &--heading {
         text-transform: uppercase;
         letter-spacing: 1rem;
-        color: $color-dark-light-1;
+        color: $color-brand;
       }
 
       &--heading--sub {
         text-transform: uppercase;
         letter-spacing: 0.5rem;
         margin-bottom: 3rem;
-        color: $color-dark-light-2;
+        color: $color-white;
       }
 
       &--paragraph {
         font-size: 2rem;
-        color: $color-dark-light-1;
+        line-height: 1;
+        color: $color-white;
         font-weight: $font-text-heavy-weight;
-        padding: 0;
-        margin: 1rem 0;
+        margin: 1.5rem 0;
         display: flex;
         align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        padding-left: 2.5rem;
       }
 
       &--paragraph::before {
         content: "";
         display: inline-block;
-        width: 1.6rem;
-        height: 2.5rem;
-        margin-right: 1rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2rem;
+        height: 2rem;
         padding: 0;
-        background: url(img/keyboard_arrow_right.svg);
+        background: url(img/arrow_forward_ios.svg);
         background-size: cover;
+        background-repeat: none;
 
         @supports (mask-image: url()) or (-webkit-mask-image: url()) {
           background-color: $color-primary;
-          -webkit-mask-image: url(img/keyboard_arrow_right.svg);
-          -webkit-image-size: cover;
+          -webkit-mask-image: url(img/arrow_forward_ios.svg);
+          mask-image: url(img/arrow_forward_ios.svg);
+          -webkit-mask-size: cover;
+          mask-size: cover;
           background-image: none;
         }
       }
@@ -344,6 +425,10 @@ h3 {
       margin-top: 3rem;
       display: flex;
     }
+
+    @media only screen and (max-width: $bp-m) {
+      padding: 5rem;
+    }
   }
 }
 
@@ -352,21 +437,46 @@ h3 {
 ********************************************************************/
 
 .protected-page {
-  max-width: 100rem;
-  margin: 0 auto;
+  max-width: $max-width;
+  min-width: $min-width;
+  margin: 10rem auto 0rem auto;
+
+  @media only screen and (max-width: $bp-l) {
+    margin: 5rem;
+    margin-bottom: 0;
+  }
+
+  @media only screen and (max-width: $bp-m) {
+    margin: 2rem;
+    margin-bottom: 0;
+  }
+
+  @media only screen and (max-width: $bp-xs) {
+    margin: 1rem;
+    margin-bottom: 0;
+  }
+
+  @media only screen and (max-width: $bp-xxs) {
+    overflow: scroll;
+  }
 }
 
 /*********************************************************
     Header Styles
 **********************************************************/
 .header {
-  margin-top: 10rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
   height: $header-height;
   border-bottom: $line-2;
+
+  @media only screen and (max-width: $bp-xs) {
+    flex-direction: column-reverse;
+    height: 100%;
+    padding-bottom: 2rem;
+  }
 
   .logo {
     display: flex;
@@ -380,6 +490,16 @@ h3 {
       width: 6rem;
       height: 6rem;
       fill: $color-brand;
+
+      @media only screen and (max-width: $bp-l) {
+        width: 5.5rem;
+        height: 5.5rem;
+      }
+
+      @media only screen and (max-width: $bp-m) {
+        width: 5rem;
+        height: 5rem;
+      }
     }
 
     .brand {
@@ -389,10 +509,22 @@ h3 {
       color: $color-brand;
       text-transform: uppercase;
       letter-spacing: 1rem;
+
+      @media only screen and (max-width: $bp-l) {
+        font-size: 3.5rem;
+        letter-spacing: 0.7rem;
+      }
+
+      @media only screen and (max-width: $bp-m) {
+        font-size: 3rem;
+        letter-spacing: 0.5rem;
+      }
     }
   }
 
   &__nav {
+    position: relative;
+    height: $header-height;
   }
 }
 
@@ -401,6 +533,7 @@ h3 {
 **********************************************************/
 .profile-nav {
   color: $color-dark;
+  position: relative;
 
   &__title {
     cursor: pointer;
@@ -415,6 +548,7 @@ h3 {
     position: absolute;
     top: $header-height;
     right: 0;
+
     z-index: 10;
     border: $line-2;
     border-top: 0;
@@ -426,6 +560,13 @@ h3 {
     transform: scale(0);
     transform-origin: top right;
     transition: all 0.5s;
+
+    @media only screen and (max-width: $bp-xs) {
+      right: auto;
+      left: 50%;
+      transform-origin: top left;
+      transform: scale(0) translateX(-50%);
+    }
   }
 
   &__item {
@@ -462,6 +603,14 @@ h3 {
     display: block;
     opacity: 1;
     transform: scale(1);
+
+    @media only screen and (max-width: $bp-xs) {
+      right: auto;
+      left: 50%;
+
+      transform-origin: top left;
+      transform: scale(1) translateX(-50%);
+    }
   }
 }
 
@@ -553,6 +702,8 @@ h3 {
 
     &--submit {
       cursor: pointer;
+      white-space: nowrap;
+
       border: none;
       padding: 0 1rem;
       background-color: $color-brand;
@@ -614,6 +765,18 @@ h3 {
 
       &--success {
         fill: $color-positive;
+      }
+
+      @media only screen and (max-width: $bp-l) {
+        width: 5.5rem;
+        height: 5.5rem;
+        margin-right: 0.8rem;
+      }
+
+      @media only screen and (max-width: $bp-m) {
+        width: 5rem;
+        height: 5rem;
+        margin-right: 0.5rem;
       }
     }
 
