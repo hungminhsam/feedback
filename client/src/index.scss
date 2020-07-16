@@ -36,6 +36,8 @@ $line-1: 1px solid $color-dark-light-1;
 $line-2: 1px solid $color-dark-light-2;
 $line-3: 1px solid $color-dark-light-3;
 
+$bp-xxl: 125em; // 2000px
+$bp-xl: 87.5em; // 1400px
 $bp-l: 62.5em; // 1000px / 16px = 62.5em, default browser 1em = 16px
 $bp-m: 50em; // 800px
 $bp-s: 37.5em; // 600px
@@ -343,7 +345,7 @@ h3 {
 
 .landing {
   min-height: 100vh;
-  background: url(img/landing-bg.jpg);
+  background-image: url(img/landing-bg.jpg);
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -428,6 +430,36 @@ h3 {
 
     @media only screen and (max-width: $bp-m) {
       padding: 5rem;
+    }
+  }
+
+  @media only screen and (max-width: $bp-xxl) {
+    background-image: url(img/landing-bg-xxl-1x.jpg);
+
+    @media (min-resolution: 192dpi) {
+      background-image: url(img/landing-bg-xxl-2x.jpg);
+    }
+  }
+
+  @media only screen and (max-width: $bp-xl) {
+    background-image: url(img/landing-bg-xl-1x.jpg);
+
+    @media (min-resolution: 192dpi) {
+      background-image: url(img/landing-bg-xl-2x.jpg);
+    }
+  }
+  @media only screen and (max-width: $bp-m) {
+    background-image: url(img/landing-bg-m-1x.jpg);
+
+    @media (min-resolution: 192dpi) {
+      background-image: url(img/landing-bg-m-2x.jpg);
+    }
+  }
+  @media only screen and (max-width: $bp-s) {
+    background-image: url(img/landing-bg-s-1x.jpg);
+
+    @media (min-resolution: 192dpi) {
+      background-image: url(img/landing-bg-s-2x.jpg);
     }
   }
 }
